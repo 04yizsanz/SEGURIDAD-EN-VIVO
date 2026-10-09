@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Seguridad - Aplicación de Autenticación</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('login')">🔐 Login</button>
+            <button class="tab-btn" onclick="showTab('register')">📝 Registro</button>
+            <button class="tab-btn" onclick="showTab('dashboard')">📊 Dashboard</button>
+            <button class="tab-btn" onclick="showTab('forgot')">🔑 Recuperar Contraseña</button>
+        </div>
+
+        <!-- LOGIN -->
+        <div id="login" class="tab-content active">
+            <div class="form-container">
+                <h2>Iniciar Sesión</h2>
+                <div id="loginMessage"></div>
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" placeholder="tu@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Contraseña</label>
+                        <input type="password" id="loginPassword" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn">Iniciar Sesión</button>
+                </form>
+                <div class="link-text">
+                    ¿No tienes cuenta? <a onclick="showTab('register')">Regístrate aquí</a>
+                </div>
+                <div class="link-text">
+                    <a onclick="showTab('forgot')">¿Olvidaste tu contraseña?</a>
+                </div>
+                <div class="demo-credentials">
+                    <p><strong>Prueba con:</strong></p>
+                    <p>Email: test@example.com</p>
+                    <p>Contraseña: MiContraseña123</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- REGISTRO -->
+        <div id="register" class="tab-content">
+            <div class="form-container">
+                <h2>Crear Nueva Cuenta</h2>
+                <div id="registerMessage"></div>
+                <form onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label for="registerEmail">Email</label>
+                        <input type="email" id="registerEmail" placeholder="tu@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Contraseña (mínimo 8 caracteres)</label>
+                        <input type="password" id="registerPassword" placeholder="••••••••" minlength="8" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPasswordConfirm">Confirmar Contraseña</label>
+                        <input type="password" id="registerPasswordConfirm" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn">Registrarse</button>
+                </form>
+                <div class="link-text">
+                    ¿Ya tienes cuenta? <a onclick="showTab('login')">Inicia sesión</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- DASHBOARD -->
+        <div id="dashboard" class="tab-content">
+            <div id="notAuthMessage" class="not-auth-message">
+                <h3>⚠️ No estás autenticado</h3>
+                <p>Inicia sesión para ver el dashboard.</p>
+                <button class="btn" onclick="showTab('login')">Ir a Login</button>
+            </div>
+
+            <div id="dashboardContent" class="dashboard-hidden">
+                <div class="dashboard">
+                    <div class="user-info">
+                        <div class="username" id="dashboardUsername"></div>
+                        <div class="status">✓ Sesión Activa</div>
+                    </div>
+
+                    <div class="indicators">
+                        <div class="indicator">
+                            <div class="status">🟢</div>
+                            <div class="label">HTTPS Activo</div>
+                        </div>
+                        <div class="indicator">
+                            <div class="status">🟢</div>
+                            <div class="label">Middleware Autenticación</div>
+                        </div>
+                        <div class="indicator">
+                            <div class="status">🟢</div>
+                            <div class="label">Rate Limiting</div>
+                        </div>
+                        <div class="indicator">
+                            <div class="status">🟢</div>
+                            <div class="label">Auditoría Activa</div>
+                        </div>
+                    </div>
+
+                    <div class="grid-2">
+                        <!-- Gráfico de intentos fallidos -->
+                        <div class="card">
+                            <h3>📈 Intentos Fallidos (Últimas 24h)</h3>
+                            <div class="chart-container">
+                                <canvas id="attemptsChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Sesiones activas -->
+                        <div class="card">
+                            <h3>👥 Sesiones Activas</h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Usuario</th>
+                                        <th>Hora Login</th>
+                                        <th>Expira</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="sessionsTable">
+                                    <tr>
+                                        <td colspan="4" class="loading-text">Cargando sesiones...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Log de Seguridad -->
+                    <div class="card">
+                        <h3>🔐 Log de Seguridad (Audit Trail)</h3>
+                        <div id="securityLog" class="security-log">
+                            <div class="loading-text">Cargando eventos...</div>
+                        </div>
+                    </div>
+
+                    <!-- Decodificador JWT -->
+                    <div class="card jwt-card">
+                        <h3>🔑 Decodificador JWT</h3>
+                        <div class="jwt-decoder">
+                            <label>Pega tu JWT aquí:</label>
+                            <textarea id="jwtInput" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."></textarea>
+                            <button type="button" class="btn-small" onclick="decodeJWT()">Decodificar</button>
+                            <button type="button" class="btn-small" onclick="copyCurrentJWT()">Copiar JWT Actual</button>
+                        </div>
+                        <div id="jwtResult"></div>
+                    </div>
+
+                    <button class="btn logout-btn" onclick="handleLogout()">Cerrar Sesión</button>
+                </div>
+            </div>
+        </div>
+
+        
+        <!-- RECUPERAR CONTRASEÑA -->
+        <div id="forgot" class="tab-content">
+            <div class="form-container">
+                <h2>Recuperar Contraseña</h2>
+                <div id="forgotMessage"></div>
+                <form onsubmit="handleForgotPassword(event)">
+                    <div class="form-group">
+                        <label for="forgotEmail">Email</label>
+                        <input type="email" id="forgotEmail" placeholder="tu@email.com" required>
+                    </div>
+                    <button type="submit" class="btn">Enviar Enlace de Recuperación</button>
+                </form>
+                <div class="link-text">
+                    <a onclick="showTab('login')">Volver a Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

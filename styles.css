@@ -1,0 +1,617 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* TABS */
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    padding: 12px 24px;
+    background: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tab-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.tab-btn.active {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* FORMULARIOS */
+.form-container {
+    background: white;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+.form-container h2 {
+    color: #333;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-group input.error {
+    border-color: #ff4757;
+}
+
+/* BOTONES */
+.btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-small {
+    padding: 8px 15px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    transition: all 0.3s;
+}
+
+.btn-small:hover {
+    background: #5568d3;
+    transform: translateY(-1px);
+}
+
+.logout-btn {
+    margin-top: 20px;
+}
+
+/* MENSAJES */
+.message {
+    padding: 12px 15px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 13px;
+    text-align: center;
+}
+
+.message.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.message.warning {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+/* LINKS */
+.link-text {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 13px;
+    color: #666;
+}
+
+.link-text a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.link-text a:hover {
+    text-decoration: underline;
+}
+
+.demo-credentials {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.demo-credentials p {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.demo-credentials p:first-child {
+    color: #999;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* DASHBOARD */
+.not-auth-message {
+    text-align: center;
+    padding: 40px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.not-auth-message h3 {
+    color: #dc3545;
+    margin-bottom: 15px;
+}
+
+.not-auth-message p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.not-auth-message .btn {
+    max-width: 200px;
+    margin: 0 auto;
+}
+
+.dashboard-hidden {
+    display: none;
+}
+
+.dashboard {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+/* INDICADORES */
+.indicators {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.indicator {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.indicator .status {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.indicator .label {
+    font-size: 12px;
+    opacity: 0.9;
+    font-weight: 600;
+}
+
+/* GRID */
+/* Antes */
+.grid-2 {
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+}
+
+/* Después */
+.grid-2 {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+.card {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.card h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 16px;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 10px;
+}
+
+.jwt-card {
+    grid-column: 1 / -1;
+}
+
+/* GRÁFICO */
+.chart-container {
+    position: relative;
+    height: 250px;
+    margin-bottom: 20px;
+}
+
+/* TABLAS */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+table th {
+    background: #667eea;
+    color: white;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+}
+
+table td {
+    padding: 12px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+table tr:hover {
+    background: #f0f0f0;
+}
+
+.status-ok {
+    color: #28a745;
+    font-weight: 600;
+}
+
+.status-error {
+    color: #dc3545;
+    font-weight: 600;
+}
+
+.loading-text {
+    text-align: center;
+    color: #999;
+    padding: 20px;
+}
+
+/* LOG DE SEGURIDAD */
+.security-log {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.log-entry {
+    padding: 12px;
+    border-left: 4px solid #667eea;
+    background: white;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.log-entry.blocked {
+    border-left-color: #dc3545;
+    background: #fff5f5;
+}
+
+.log-entry.success {
+    border-left-color: #28a745;
+    background: #f5fff7;
+}
+
+.log-entry.warning {
+    border-left-color: #ffc107;
+    background: #fffbf0;
+}
+
+.log-time {
+    color: #999;
+    font-size: 11px;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.log-event {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.log-detail {
+    color: #666;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.log-user {
+    color: #999;
+    font-size: 11px;
+    margin-top: 5px;
+}
+
+/* JWT DECODER */
+.jwt-decoder {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+}
+
+.jwt-decoder label {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.jwt-decoder textarea {
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    resize: none;
+    margin-bottom: 10px;
+}
+
+.jwt-decoder textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.jwt-result {
+    background: white;
+    padding: 15px;
+    border-radius: 6px;
+    margin-top: 15px;
+    border: 1px solid #e0e0e0;
+}
+
+.jwt-part {
+    margin-bottom: 15px;
+}
+
+.jwt-part-title {
+    background: #667eea;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.jwt-part-content {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    overflow-x: auto;
+    color: #333;
+    border: 1px solid #e0e0e0;
+}
+
+.jwt-valid {
+    margin-top: 10px;
+    padding: 10px;
+    background: #d4edda;
+    border-radius: 4px;
+    color: #155724;
+    font-size: 12px;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* INFO DE USUARIO */
+.user-info {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.user-info .username {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.user-info .status {
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+
+    .form-container {
+        padding: 20px;
+    }
+
+    .tabs {
+        flex-wrap: wrap;
+    }
+
+    .tab-btn {
+        padding: 10px 16px;
+        font-size: 12px;
+    }
+
+    .indicators {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    .card h3 {
+        font-size: 14px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    table th,
+    table td {
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+
+    .form-container {
+        padding: 15px;
+        max-width: 100%;
+    }
+
+    .tabs {
+        flex-direction: column;
+    }
+
+    .tab-btn {
+        width: 100%;
+    }
+
+    .indicators {
+        grid-template-columns: 1fr;
+    }
+
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+
+    table {
+        font-size: 11px;
+    }
+
+    table th,
+    table td {
+        padding: 6px;
+    }
+
+    .chart-container {
+        height: 200px;
+    }
+}
+
+/* SCROLL */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #667eea;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #5568d3;
+}
